@@ -28,6 +28,8 @@ void nyx_abort(const char *fmt, ...)
     msglen = vsnprintf(msg, sizeof(msg), fmt, ap);
     va_end(ap);
 
+    msglen = MIN(msglen, sizeof(msg));
+
     nyx_error("%s\n", msg);
     set_abort_reason_auxiliary_buffer(GET_GLOBAL_STATE()->auxilary_buffer, msg,
                                       msglen);
